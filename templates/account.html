@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Welcome {{ user['fullname'] }} {% endblock %}</h1>
+    <h6>Member since {{ user['date'] }}</h6>
+    <h6>Your wallet balance is ${{ user['wallet'] }}</h6>
+    <hr/>
+
+    <h5>Add Funds to Wallet</h5>
+    <form method="post">
+        <div class="form-group">
+            <input type="text" name="funds"
+                   placeholder="Additional funds" class="form-control"
+                   value="{{ request.form['funds'] }}"></input>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+    <form action="/signout">
+        <div class="form-group">
+            <button type="submit" class="btn btn-secondary">Sign Out</button>
+        </div>
+    </form>
+
+    <hr/>
+    <h2>Your Active Bets</h2>
+    <br/>
+    {% for bet in placed_bets %}
+        <h3> {{ bet['league'] }} | {{ bet['team_name'] }} | {{ bet['player'] }} </h3>
+        <h4> {{ bet['bet_type'] }} | {{ bet['metric'] }} | {{ bet['metric_amount'] }} </h4>
+        <h4> Your Share: {{ bet['hit_miss'] }} for ${{ bet['bet_amount'] }} </h4>
+        <span class="badge badge-primary">{{ bet['created'] }}</span>
+        <a href="{{ url_for('bet', bet_id=bet['id']) }}">
+            <span class="badge badge-warning">View Info</span>
+        </a>
+        <hr/>
+    {% endfor %}
+
+    <h2>Your Proposed Bets</h2>
+    <br/>
+    {% for bet in proposed_bets %}
+        <h3> {{ bet['league'] }} | {{ bet['team_name'] }} | {{ bet['player'] }} </h3>
+        <h4> {{ bet['bet_type'] }} | {{ bet['metric'] }} | {{ bet['metric_amount'] }} </h4>
+        <h4> Your Share: {{ bet['hit_miss'] }} for ${{ bet['bet_amount'] }} </h4>
+        <span class="badge badge-primary">{{ bet['created'] }}</span>
+        <a href="{{ url_for('proposed', prop_id=bet['id']) }}">
+            <span class="badge badge-warning">View Info</span>
+        </a>
+        <hr/>
+    {% endfor %}
+
+{% endblock %}

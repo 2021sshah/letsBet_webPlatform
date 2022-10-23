@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Welcome to LetsBet! {% endblock %}</h1>
+
+    <form method="post">
+        <div class="team_name">
+            <label for="team_name">Team Name</label>
+            <input type="text" name="team_name"
+                   placeholder="Team" class="form-control"
+                   value="{{ request.form['team_name'] }}"></input>
+        </div>
+        <div class="form-group">
+            <label for="player_name">Player Name</label>
+            <input type="text" name="player_name"
+                   placeholder="Player" class="form-control"
+                   value="{{ request.form['player_name'] }}"></input>
+        </div>
+       
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </form>
+
+    <hr/>
+    <h1>View Active Bets</h1>
+    <br/>
+    {% for bet in placed_bets %}
+        <h3> {{ bet['league'] }} | {{ bet['team_name'] }} | {{ bet['player'] }} </h3>
+        <h4> {{ bet['bet_type'] }} | {{ bet['metric'] }} | {{ bet['metric_amount'] }} </h4>
+        <h4> Hit Pool: ${{ bet['hit_pool'] }} | Miss Pool: ${{ bet['miss_pool'] }} </h4>
+        <span class="badge badge-primary">{{ bet['created'] }}</span>
+        <a href="{{ url_for('bet', bet_id=bet['id']) }}">
+            <span class="badge badge-warning">View Info</span>
+        </a>
+        <hr/>
+    {% endfor %}
+{% endblock %}

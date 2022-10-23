@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Propose New Bet {% endblock %}</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="title">League</label>
+            <input type="text" name="league"
+                placeholder="NBA or NFL" class="form-control"
+                value="{{ request.form['league'] }}"></input>
+        </div>
+        <div class="form-group">
+            <label for="title">Game Date</label>
+            <input type="text" name="game_date"
+                placeholder="DD/MM/YYYY" class="form-control"
+                value="{{ request.form['game_date'] }}"></input>
+        </div>
+        <div class="form-group">
+            <label for="title">Team Abbreviations</label>
+            <input type="text" name="team_name"
+                placeholder="ie ZZZ" class="form-control"
+                value="{{ request.form['team_name'] }}"></input>
+        </div>
+        <div class="form-group">
+            <label for="title">Player</label>
+            <input type="text" name="player"
+                placeholder="ie John Doe or leave empty for entire team" class="form-control"
+                value="{{ request.form['player'] }}"></input>
+        </div>
+        <div class="form-group">
+            <label for="title">Bet Type</label>
+            <input type="text" name="bet_type"
+                placeholder="choose 'over', 'under', or 'spread'" class="form-control"
+                value="{{ request.form['bet_type'] }}"></input>
+        </div>
+        <div class="form-group">
+            <label for="title">Metric</label>
+            <input type="text" name="metric"
+                placeholder="ie 'Points' or 'Total Yards'" class="form-control"
+                value="{{ request.form['metric'] }}"></input>
+        </div>
+        <div class="form-group">
+            <label for="title">Metric Amount</label>
+            <input type="text" name="metric_amount"
+                placeholder="enter integer amount" class="form-control"
+                value="{{ request.form['metric_amount'] }}"></input>
+        </div>
+        <div class="form-group">
+            <label for="title">Hit/Miss</label>
+            <input type="text" name="hit_miss"
+                placeholder="choose 'hit' or 'miss'" class="form-control"
+                value="{{ request.form['hit_miss'] }}"></input>
+        </div>
+        <div class="form-group">
+            <label for="title">Bet Amount</label>
+            <input type="text" name="bet_amount"
+                placeholder="enter integer amount" class="form-control"
+                value="{{ request.form['bet_amount'] }}"></input>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+{% endblock %}

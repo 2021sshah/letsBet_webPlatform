@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Welcome {{ user['fullname'] }} {% endblock %}</h1>
+    <h6>Member since {{ user['date'] }}</h6>
+    <h6>Your wallet balance is ${{ user['wallet'] }}</h6>
+    <hr/>
+
+    <h5>Add Funds to Wallet</h5>
+    <form method="post">
+        <div class="form-group">
+            <!-- <label for="password">Password</label> -->
+            <input type="text" name="funds" 
+                    placeholder="Additional funds" class="form-control"
+                    value="{{ request.form['funds'] }}"></input>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    <hr/>
+
+    <form method="post">
+    </hr>
+        <div class="form-group">
+            <!-- <button type="submit" class="btn btn-secondary">Sign Out</button> -->
+            <input type="button" class="btn btn-secondary" placeholder="Sign Out"
+                value="{{ request.form['funds'] }}"> </button>
+        </div>
+    </form>
+{% endblock %}
