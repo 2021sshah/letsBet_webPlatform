@@ -29,9 +29,9 @@ def index():
 		filter_player = request.form['player_name']
 		filter_team = request.form['team_name']
 		
-		if filter_player != "":
+		if filter_player:
 			filtered_bets = conn.execute('SELECT * FROM placed_bets WHERE player = ?',(filter_player,)).fetchall()
-		elif filter_team != "":
+		elif filter_team :
 			filtered_bets = conn.execute('SELECT * FROM placed_bets WHERE team_name = ?',(filter_team,)).fetchall()
 		else:
 			filtered_bets = conn.execute('SELECT * FROM placed_bets').fetchall()
@@ -328,7 +328,7 @@ def get_proposed_bet(): # change to get bet
    return proposed
 
 
-@app.route('/all_proposed')
+@app.route('/all_proposed', methods=('GET', 'POST'))
 def all_proposed():
    conn = get_db_connection()
    proposed_bets = conn.execute('SELECT * FROM proposed_bets').fetchall()
@@ -337,9 +337,9 @@ def all_proposed():
       filter_player = request.form['player_name']
       filter_team = request.form['team_name']
       
-      if filter_player != "":
+      if filter_player:
          filtered_bets = conn.execute('SELECT * FROM proposed_bets WHERE player = ?',(filter_player,)).fetchall()
-      elif filter_team != "":
+      elif filter_team:
          filtered_bets = conn.execute('SELECT * FROM proposed_bets WHERE team_name = ?',(filter_team,)).fetchall()
       else:
          filtered_bets = conn.execute('SELECT * FROM proposed_bets').fetchall()
