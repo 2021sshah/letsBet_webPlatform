@@ -139,6 +139,7 @@ def register():
 		else:
 			# update user
 			logged_in = True
+			user_obj.date = 'Just Now'
 			user_obj.fullname = fullname
 			user_obj.username = username
 			user_obj.password = password
